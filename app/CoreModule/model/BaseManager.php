@@ -6,7 +6,7 @@
  * Time: 8:57 PM
  */
 
-namespace App\Module;
+namespace App\Model;
 use Nette\Database\Context;
 use Nette\Object;
 
