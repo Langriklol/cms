@@ -6,13 +6,17 @@
  * Time: 9:10 PM
  */
 
-namespace App\Model;
+namespace App\CoreModule\Model;
+
 use App\Model\BaseManager;
 use Nette\Database\Table\IRow;
 use Nette\Database\Table\Selection;
 use Nette\Utils\ArrayHash;
 
-
+/**
+ * Class ArticleManager
+ * @package App\CoreModule\Model
+ */
 class ArticleManager extends BaseManager
 {
     const TABLE_NAME = 'article';

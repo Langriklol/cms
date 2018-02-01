@@ -16,16 +16,18 @@ session:
 
 
 database:
-	dsn: 'mysql:host=127.0.0.1;dbname=test'
-	user:
+	dsn: 'mysql:host=127.0.0.1;dbname=cms'
+	user: root
 	password:
 	options:
 		lazy: yes
 
+forms:
+    messages:
+        REQUIRED: 'Required field.'
 
 services:
 	- App\Model\UserManager
-	- App\Forms\FormFactory
 	router: App\RouterFactory::createRouter
 
 includes:

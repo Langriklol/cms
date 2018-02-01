@@ -3,26 +3,49 @@
  * @param array    $flashes  flash messages
  *}
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
+<html lang="cs-cz">
+        <head>
+                <meta charset="UTF-8" />
+                <title>{include title|striptags}</title>
+                <meta name="description" content="{include description|striptags}" />
 
-	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Sandbox</title>
+                {block css}
+                <link rel="stylesheet" href="{$basePath}/css/style.css" type="text/css"/>
+                {/block}
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{$basePath}/css/style.css">
-	{block head}{/block}
-</head>
+                {block head}{/block}
+        </head>
 
-<body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+        <body>
+                <header>
+                        <h1>Basic Nette CMS</h1>
+                </header>
 
-	{include content}
+                <p n:foreach="$flashes as $flash" class="message">{$flash->message}</p>
 
-	{block scripts}
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-	<script src="{$basePath}/js/main.js"></script>
-	{/block}
-</body>
+                <nav>
+                        <ul>
+                                <li><a n:href=":Core:Article:">Home</a></li>
+                                <li><a n:href=":Core:Article:list">Articles</a></li>
+                                <li><a n:href=":Core:Contact:">Contact me</a></li>
+                        </ul>
+                </nav>
+                <br clear="both" />
+
+                <article>
+                        <header>
+                                <h1>{include title}</h1>
+                        </header>
+                        <section>
+                                {include content}
+                        </section>
+                </article>
+
+                <footer>
+                        <p>Just because Lango is learning and enjoying Nette framework :) </p>
+                        <p><a n:href=":Core:Administration:">Administration entry :P</a></p>
+                </footer>
+
+                {block scripts}{/block}
+        </body>
 </html>

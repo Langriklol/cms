@@ -10,6 +10,10 @@ namespace App\Model;
 use Nette\Database\Context;
 use Nette\Object;
 
+/**
+ * Class BaseManager
+ * @package App\Model
+ */
 class BaseManager extends Object
 {
     /** @var Context database context */

@@ -1,0 +1,14 @@
+{define title}Article list{/define}
+{define description}Listing of all articles{/define}
+{block content}
+<table>
+    <tr n:foreach="$articles as $article">
+        <td>
+            <h2><a n:href=":Core:Article: $article->url">{$article->title}</a></h2>
+            {$article->description}
+            <br />
+            <a n:href=":Core:Article:editor $article->url">Edit</a>
+            <a n:href=":Core:Article:remove $article->url">Remove</a>
+        </td>
+    </tr>
+</table>

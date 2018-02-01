@@ -8,8 +8,13 @@
 
 namespace App\CoreModule\Presenters;
 
+use App\Presenters\BasePresenter;
 
-class AdministrationPresenter
+/**
+ * Class AdministrationPresenter
+ * @package App\CoreModule\Presenters
+ */
+class AdministrationPresenter extends BasePresenter
 {
 
 }
