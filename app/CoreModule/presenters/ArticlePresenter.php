@@ -92,6 +92,11 @@ class ArticlePresenter extends BasePresenter
         return $form;
     }
 
+    /**
+     * @param Form $form
+     * @param ArrayHash $values
+     * @throws \Nette\Application\AbortException
+     */
     public function editorFormSucceed(Form $form, ArrayHash $values)
     {
         try{
