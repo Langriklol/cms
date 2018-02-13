@@ -31,9 +31,9 @@ class UserManager extends BaseManager implements IAuthenticator
     {
         list($username, $password) = $credentials; //extraction of credentials
 
-        $user = $this->database->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
+        $user = $this->context->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
 
-        // Ověření uživatele.
+        // User verification
         if (!$user) {
             // Throws exception if user does not exists
             throw new AuthenticationException('This username does not exists.', self::IDENTITY_NOT_FOUND);
@@ -45,11 +45,10 @@ class UserManager extends BaseManager implements IAuthenticator
             $user->update(array(self::COLUMN_PASSWORD_HASH => Passwords::hash($password)));
         }
 
-        // Příprava uživatelských dat.
         $userData = $user->toArray(); // User data extract
         unset($userData[self::COLUMN_PASSWORD_HASH]); // Removes password from user data due to security
 
-        // Vrátí novou identitu přihlášeného uživatele.
+        // Return a new identity of user
         return new Identity($user[self::COLUMN_ID], $user[self::COLUMN_ROLE], $userData);
     }
 
@@ -63,7 +62,7 @@ class UserManager extends BaseManager implements IAuthenticator
     {
         try {
             // User DB insertion
-            $this->database->table(self::TABLE_NAME)->insert(array(
+            $this->context->table(self::TABLE_NAME)->insert(array(
                 self::COLUMN_NAME => $username,
                 self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
             ));

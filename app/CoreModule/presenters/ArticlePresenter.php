@@ -66,7 +66,7 @@ class ArticlePresenter extends BasePresenter
     }
 
     /** @param string $url */
-    public function actionEditor(string $url)
+    public function actionEditor(string $url = null)
     {
         if ($url){
             ($article = $this->articleManager->getArticle($url)) ?

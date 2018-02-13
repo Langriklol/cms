@@ -45,6 +45,7 @@ class ArticleManager extends BaseManager
     public function saveArticle($article)
     {
         if(!$article[self::COLUMN_ID]){
+            $article['article_id'] = null;
             $this->context->table(self::TABLE_NAME)->insert($article);
         }else{
             $this->context->table(self::TABLE_NAME)->where(self::COLUMN_ID, $article[self::COLUMN_ID])->update($article);
