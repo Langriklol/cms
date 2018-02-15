@@ -8,7 +8,7 @@ use Nette\Security\AuthenticationException;
 use Nette\Security\User;
 use Nette\Utils\ArrayHash;
 
-class UserForm extends Object
+class UserForms extends Object
 {
     /** @var User $user */
     private $user;

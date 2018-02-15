@@ -1,4 +1,23 @@
 parameters:
+        # Presenters
+        administration: Core:Administration
+        article: Core:Article
+        contact: Core:Contact
 
+# Settings of own services accessible via DI in CoreModule
 services:
-    - App\CoreModule\Model\ArticleManager
+        security.authorizator: # Settings of resources and flags in CoreModule with static ACL
+                setup:
+                        - addResource(%administration%)
+                        - addResource(%article%)
+                        - addResource(%contact%)
+                        - allow(%guest%, %administration%, 'login')
+                        - allow(%guest%, %administration%, 'register')
+                        - allow(%guest%, %article%, 'default')
+                        - allow(%guest%, %article%, 'list')
+                        - allow(%guest%, %contact%)
+                        - allow(%member%, %administration%, 'default')
+                        - allow(%member%, %administration%, 'logout')
+
+        # Some other services in DI
+        - App\CoreModule\Model\ArticleManagerr

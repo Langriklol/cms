@@ -3,17 +3,25 @@
 # https://nette.org/security-warning
 #
 parameters:
+    guest: guest
+    member: member
+    admin: admin
 
+php:
+    date.timezone: Europe/Prague
 
 application:
-	errorPresenter: Error
+	errorPresenter: %error%
+	catchExceptions: true
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
 
 session:
-	expiration: 14 days
+	expiration: 30 minutes
 
+di:
+    debugger: true
 
 database:
 	dsn: 'mysql:host=127.0.0.1;dbname=cms'
@@ -25,10 +33,22 @@ database:
 forms:
     messages:
         REQUIRED: 'Required field.'
+security:
+    roles:
+        guest:
+        member: [guest]
+        admin:
 
 services:
 	- App\Model\UserManager
 	router: App\RouterFactory::createRouter
+	authenticator: App\Model\UserManager
+	security.authorizator:
+	    setup:
+	        - addResource(%error%)
+	        - allow(%guest%, %error%)
+	        - allow(%admin%)
+	- App\Forms\UserForms
 
 includes:
     - ../CoreModule/config/config.neon
