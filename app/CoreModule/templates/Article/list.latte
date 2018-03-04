@@ -7,8 +7,10 @@
             <h2><a n:href=":Core:Article: $article->url">{$article->title}</a></h2>
             {$article->description}
             <br />
-            <a n:href=":Core:Article:editor $article->url">Edit</a>
-            <a n:href=":Core:Article:remove $article->url">Remove</a>
+            {if $admin}
+                <a n:href=":Core:Article:editor $article->url">Edit</a>
+                <a n:href=":Core:Article:remove $article->url">Remove</a>
+            {/if}
         </td>
     </tr>
 </table>

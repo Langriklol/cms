@@ -9,14 +9,13 @@
 namespace App\CoreModule\Presenters;
 
 use App\CoreModule\Model\ArticleManager;
-use App\Presenters\BasePresenter;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use Nette\Database\ConstraintViolationException;
 use Nette\Utils\ArrayHash;
 
 /** @package App\CoreModule\Presenters */
-class ArticlePresenter extends BasePresenter
+class ArticlePresenter extends BaseCorePresenter
 {
     const DEFAULT_URL = 'home';
 

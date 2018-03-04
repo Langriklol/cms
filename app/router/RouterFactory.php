@@ -18,13 +18,23 @@ class RouterFactory
     {
         $router = new RouteList();
         $router[] = new Route('contact-me/', 'Core:Contact:default');
-        $router[] = new Route('administration/', 'Core:Administration:default');
+        $router[] = new Route('<action>/', [
+            'presenter' => 'Core:Administration',
+            'action' => [
+                Route::FILTER_TABLE => [
+                    'administration' => 'default',
+                    'login' => 'login',
+                    'logout' => 'logout',
+                    'register' => 'register'
+                ],
+                Route::FILTER_STRICT => true
+            ]
+        ]);
         $router[] = new Route('[<action>/][<url>]', array(
             'presenter' => 'Core:Article',
             'action' => array(
                 Route::VALUE => 'default',
                 Route::FILTER_TABLE => array(
-                    // řetězec v URL => akce presenteru
                     'articles' => 'list',
                     'editor' => 'editor',
                     'remove' => 'remove'

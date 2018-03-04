@@ -61,7 +61,7 @@ class UserForms extends Object
     {
         $form = $form ? $form : new Form;
         $form->addText('username', 'Username')->setRequired();
-        $form->addPassword('password', 'Password');
+        $form->addPassword('password', 'Password')->setRequired();
         return $form;
     }
 
@@ -79,7 +79,8 @@ class UserForms extends Object
     {
         $form = $this->createBasicForm($form);
         $form->addPassword('password_repeat', 'Repeat password')
-            ->addRule(Form::EQUAL, 'Passwords don\'t match.', $form['password']);
+            ->addRule(Form::EQUAL, 'Passwords don\'t match.', $form['password'])
+            ->setRequired();
         $form->addSubmit('register', 'Sign up');
         $form->onSuccess[] = function (Form $form) use ($instructions) {
             $this->login($form, $instructions, true);

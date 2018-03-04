@@ -2,28 +2,53 @@
 
 namespace App\Presenters;
 
-use Nette;
-use Nette\Application\Responses;
+use Nette\Application\AbortException;
+use Nette\Application\BadRequestException;
 use Tracy\ILogger;
 
-
-class ErrorPresenter implements Nette\Application\IPresenter
+class ErrorPresenter extends BasePresenter
 {
-	use Nette\SmartObject;
-
 	/** @var ILogger */
 	private $logger;
 
 
 	public function __construct(ILogger $logger)
 	{
+	    parent::__construct();
 		$this->logger = $logger;
 	}
 
+    /**
+     * @param $exception
+     * @throws AbortException
+     */
+    public function renderDefault($exception)
+    {
+        $serverError = false;
+        // Pokud jde o chybu v dotazu.
+        if ($exception instanceof BadRequestException) {
+            $this->logger->log(
+                "HTTP code {$exception->getCode()}: {$exception->getMessage()} in {$exception->getFile()}:{$exception->getLine()}", 'access');
+        } else {
+            $this->setView('500');
+            $this->logger->log($exception, ILogger::EXCEPTION); // Logs exception
+            $serverError = true;
+        }
 
+        // If it is AJAX query, error will be in payload
+        if ($this->isAjax()) {
+            $this->payload->error = true;
+            $this->terminate();
+        } elseif (!$serverError) { // If not the server error
+            $this->redirect(':Core:Article:', 'error'); // Redirect to own error page
+        }
+        //Otherwise will render error code 500
+    }
+
+    /*
 	/**
 	 * @return Nette\Application\IResponse
-	 */
+	 *//*
 	public function run(Nette\Application\Request $request)
 	{
 		$e = $request->getParameter('exception');
@@ -39,5 +64,5 @@ class ErrorPresenter implements Nette\Application\IPresenter
 		return new Responses\CallbackResponse(function () {
 			require __DIR__ . '/templates/Error/500.phtml';
 		});
-	}
+	}*/
 }

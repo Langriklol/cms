@@ -1,6 +1,10 @@
 {define title}Administration{/define}
 {define description}Web administration.{/define}
 {block content}
-<p>Welcome in the control centre!</p>
-<h2><a n:href=":Core:Article:editor">Article editor</a></h2>
-<h2><a n:href=":Core:Article:list">Article <list></list></a></h2>
+    {if $admin}
+        <p n:if="$admin">Hello {$username}, welcome in the control centre!</p>
+        <h2><a n:href=":Core:Article:editor">Article editor</a></h2>
+        <h2><a n:href=":Core:Article:list">Article list</a></h2>
+    {else}
+        <p>You are not allowed to be here. Ask admin for permissions or return to homepage</p>
+    {/if}

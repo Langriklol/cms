@@ -9,7 +9,6 @@
 namespace App\CoreModule\Presenters;
 
 use App\Forms\UserForms;
-use App\Presenters\BasePresenter;
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
 
@@ -18,7 +17,7 @@ use Nette\Utils\ArrayHash;
  * Class AdministrationPresenter
  * @package App\CoreModule\Presenters
  */
-class AdministrationPresenter extends BasePresenter
+class AdministrationPresenter extends BaseCorePresenter
 {
     /** @var UserForms $userFormsFactory Factory for user forms */
     private $userFormsFactory;
@@ -33,6 +32,9 @@ class AdministrationPresenter extends BasePresenter
     }
 
     /* Called before any action of presenter and initialize variables */
+    /**
+     * @throws \Nette\Application\AbortException
+     */
     public function startup()
     {
         parent::startup();

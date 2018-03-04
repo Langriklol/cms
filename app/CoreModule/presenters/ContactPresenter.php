@@ -8,7 +8,6 @@
 
 namespace App\CoreModule\Presenters;
 
-use App\Presenters\BasePresenter;
 use Nette\Application\UI\Form;
 use Nette\InvalidStateException;
 use Nette\Mail\Message;
@@ -19,7 +18,7 @@ use Nette\Utils\ArrayHash;
  * Class ContactPresenter
  * @package App\CoreModule\Presenters
  */
-class ContactPresenter extends BasePresenter
+class ContactPresenter extends BaseCorePresenter
 {
     const EMAIL = '';
 

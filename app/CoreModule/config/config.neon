@@ -20,4 +20,4 @@ services:
                         - allow(%member%, %administration%, 'logout')
 
         # Some other services in DI
-        - App\CoreModule\Model\ArticleManagerr
+        - App\CoreModule\Model\ArticleManager
