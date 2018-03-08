@@ -2,3 +2,11 @@
 {define description}{$article->description}{/define}
 {block content}
 {$article->content|noescape}
+<br />
+<h2>Comments:</h2>
+{foreach $comments as $comment}
+    <div class="comment">
+        <h3>User {$comment->user_id} wrote at {$comment->timestamp}:</h3>
+        <p>{$comment->content}</p>
+    </div>
+{/foreach}

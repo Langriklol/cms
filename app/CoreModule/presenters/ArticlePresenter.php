@@ -38,13 +38,15 @@ class ArticlePresenter extends BaseCorePresenter
             $url = self::DEFAULT_URL;
         }
 
-        $article = $this->articleManager->getArticle($url);
+        $articleData = $this->articleManager->getArticle($url);
+        list('article' => $article, 'comments' => $comments) = $articleData;
 
         if(!$article){
             throw new BadRequestException;
         }
 
         $this->template->article = $article;
+        $this->template->comments = $comments;
     }
 
     /** Renders list of articles */

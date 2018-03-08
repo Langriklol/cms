@@ -17,7 +17,8 @@ class RouterFactory
     public static function createRouter()
     {
         $router = new RouteList();
-        $router[] = new Route('contact-me/', 'Core:Contact:default');
+        $router[] = new Route('contact-us/', 'Core:Contact:default');
+        $router[] = new Route('about/', 'Core:About:default');
         $router[] = new Route('<action>/', [
             'presenter' => 'Core:Administration',
             'action' => [

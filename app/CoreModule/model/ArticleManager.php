@@ -36,7 +36,9 @@ class ArticleManager extends BaseManager
      */
     public function getArticle($url)
     {
-        return $this->context->table(self::TABLE_NAME)->where(self::COLUMN_URL, $url)->fetch();
+        $article = $this->context->table(self::TABLE_NAME)->where(self::COLUMN_URL, $url)->fetch();
+        $comments = $article->related('comment')->order('timestamp');
+        return ['article' => $article, 'comments' => $comments];
     }
 
     /**
