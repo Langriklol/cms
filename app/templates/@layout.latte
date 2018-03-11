@@ -5,47 +5,49 @@
 <!DOCTYPE html>
 <html lang="cs-cz">
         <head>
-                <meta charset="UTF-8" />
-                <title>{include title|striptags}</title>
-                <meta name="description" content="{include description|striptags}" />
+            <meta charset="UTF-8" />
+            <title>{include title|striptags}</title>
+            <meta name="description" content="{include description|striptags}" />
+            <link rel="shortcut icon" type="image/x-ico" href="{$basePath}/favicon.ico" />
 
-                {block css}
-                <link rel="stylesheet" href="{$basePath}/css/style.css" type="text/css"/>
-                {/block}
 
-                {block head}{/block}
+            {block css}
+            <link rel="stylesheet" href="{$basePath}/css/style.css" type="text/css"/>
+            {/block}
+
+            {block head}{/block}
         </head>
 
         <body>
+            <header>
+                <h1>Daily HW | Best reviews ever</h1>
+            </header>
+
+            <p n:foreach="$flashes as $flash" class="message">{$flash->message}</p>
+
+            <nav>
+                <ul>
+                    <li><a n:href=":Core:Article:">Home</a></li>
+                    <li><a n:href=":Core:Article:list">Articles</a></li>
+                    <li><a n:href=":Core:Contact:">Contact us</a></li>
+                </ul>
+            </nav>
+            <br clear="both" />
+
+            <article>
                 <header>
-                        <h1>Daily HW | Best reviews ever</h1>
+                    <h1>{include title}</h1>
                 </header>
+                <section>
+                    {include content}
+                </section>
+            </article>
 
-                <p n:foreach="$flashes as $flash" class="message">{$flash->message}</p>
+            <footer>
+                <p>Just because Lango is learning and enjoying Nette framework :) </p>
+                <p><a n:href=":Core:Administration:">Administration entry :P</a></p>
+            </footer>
 
-                <nav>
-                        <ul>
-                                <li><a n:href=":Core:Article:">Home</a></li>
-                                <li><a n:href=":Core:Article:list">Articles</a></li>
-                                <li><a n:href=":Core:Contact:">Contact us</a></li>
-                        </ul>
-                </nav>
-                <br clear="both" />
-
-                <article>
-                        <header>
-                                <h1>{include title}</h1>
-                        </header>
-                        <section>
-                                {include content}
-                        </section>
-                </article>
-
-                <footer>
-                        <p>Just because Lango is learning and enjoying Nette framework :) </p>
-                        <p><a n:href=":Core:Administration:">Administration entry :P</a></p>
-                </footer>
-
-                {block scripts}{/block}
+            {block scripts}{/block}
         </body>
 </html>

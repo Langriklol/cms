@@ -6,7 +6,7 @@
 <h2>Comments:</h2>
 {foreach $comments as $comment}
     <div class="comment">
-        <h3>User {$comment->user_id} wrote at {$comment->timestamp}:</h3>
+        <h3>{$comment->ref('user', 'user_id')->username} wrote at {$comment->timestamp}:</h3>
         <p>{$comment->content}</p>
     </div>
 {/foreach}
