@@ -2,7 +2,20 @@
 {define description}{$article->description}{/define}
 {block content}
 {$article->content|noescape}
+<!-- Article rating -->
+<form class="rating">
+    <input type="hidden" name="stars" id="rating">
+    <p>
+        <span class="glyphicon glyphicon-star-empty review-star"></span>
+        <span class="glyphicon glyphicon-star-empty review-star"></span>
+        <span class="glyphicon glyphicon-star-empty review-star"></span>
+        <span class="glyphicon glyphicon-star-empty review-star"></span>
+        <span class="glyphicon glyphicon-star-empty review-star"></span>
+    </p>
+</form>
+
 <br />
+<!-- Comments section -->
 <h2>Comments:</h2>
 {foreach $comments as $comment}
     <div class="comment">

@@ -76,6 +76,22 @@ class ArticlePresenter extends BaseCorePresenter
         }
     }
 
+
+    /**
+     * @param string $url Url of article
+     * @param float $rating Rating to be count
+     * @throws BadRequestException Throws exception if not AJAX
+     */
+    public function actionRate(string $url, float $rating)
+    {
+        if($this->isAjax())
+        {
+            $this->articleManager->rateArticle($url, $rating);
+        }else{
+            throw new BadRequestException();
+        }
+    }
+
     /**
      *  Creates editor form component
      * @return Form editor form

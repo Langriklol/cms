@@ -42,6 +42,22 @@ class ArticleManager extends BaseManager
     }
 
     /**
+     * @param string $url URL of article
+     * @param float $rating Rating of article (0 to 5 - star rating; steps by 0.5)
+     */
+    public function rateArticle($url, $rating)
+    {
+        $article = $this->getArticle($url);
+        $currentRating = explode(',',$article->rating);
+        list($currentRating, $count) = $currentRating;
+        $added = $count++;
+
+        $article->rating = (($currentRating / $count + $rating) / $added) . ",{$added}";
+
+        $this->context->table('article')->where('article_id', $article->article_id)->update($article);
+    }
+
+    /**
      * @param array|ArrayHash article
      */
     public function saveArticle($article)
