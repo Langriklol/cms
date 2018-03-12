@@ -8,11 +8,6 @@
             <meta charset="UTF-8" />
             <title>Daily HW | {include title|striptags}</title>
             <meta name="description" content="{include description|striptags}" />
-            <link rel="shortcut icon" type="image/x-ico" href="{$basePath}/favicon.ico" />
-            <!-- Minified BootStrap JS -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-            <!-- Minified JQuery -->
-            <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
             {block css}
                 <link rel="stylesheet" href="{$basePath}/css/style.css" type="text/css"/>
@@ -20,7 +15,13 @@
                 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
             {/block}
 
-            {block head}{/block}
+            {block head}
+                <link rel="shortcut icon" type="image/x-ico" href="{$basePath}/favicon.ico" />
+                <!-- Minified BootStrap JS -->
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+                <!-- Minified JQuery -->
+                <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+            {/block}
         </head>
 
         <body>
