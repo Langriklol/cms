@@ -10,6 +10,7 @@ namespace App\CoreModule\Presenters;
 
 use App\CoreModule\Model\ArticleManager;
 use Nette\Application\BadRequestException;
+use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Form;
 use Nette\Database\ConstraintViolationException;
 use Nette\Utils\ArrayHash;
@@ -87,6 +88,19 @@ class ArticlePresenter extends BaseCorePresenter
         if($this->isAjax())
         {
             $this->articleManager->rateArticle($url, $rating);
+        }else{
+            throw new BadRequestException();
+        }
+    }
+
+    /**
+     * @param string $url
+     * @throws \Nette\Application\AbortException | \Nette\Application\BadRequestException
+     */
+    public function actionGetRating(string $url)
+    {
+        if($this->isAjax()){
+            $this->sendResponse(new JsonResponse(['rating' => $this->articleManager->getArticleRating($url)]));
         }else{
             throw new BadRequestException();
         }
