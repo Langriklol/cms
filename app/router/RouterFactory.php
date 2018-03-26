@@ -45,6 +45,7 @@ class RouterFactory
             'url' => null,
         ));
         $router[] = new Route('[<url>]', 'Core:Article:default');
+        $router[] = new Route('user/[<id>]', 'Core:User:default');
         return $router;
     }
 }

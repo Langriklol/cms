@@ -14,6 +14,7 @@ function setStars() {
     $("#rating").val(selectedStars);
 
     returnStarState();
+
 }
 
 //Resets all stars and select all to cursor

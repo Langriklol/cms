@@ -83,7 +83,7 @@ class ArticlePresenter extends BaseCorePresenter
      * @param float $rating Rating to be count
      * @throws BadRequestException Throws exception if not AJAX
      */
-    public function actionRate(string $url, float $rating)
+    public function handleRate(string $url, float $rating)
     {
         if($this->isAjax())
         {
@@ -97,7 +97,7 @@ class ArticlePresenter extends BaseCorePresenter
      * @param string $url
      * @throws \Nette\Application\AbortException | \Nette\Application\BadRequestException
      */
-    public function actionGetRating(string $url)
+    public function handleGetRating(string $url)
     {
         if($this->isAjax()){
             $this->sendResponse(new JsonResponse(['rating' => $this->articleManager->getArticleRating($url)]));
