@@ -41,6 +41,11 @@ class ArticleManager extends BaseManager
         return ['article' => $article, 'comments' => $comments];
     }
 
+    public function getUserArticle(int $id)
+    {
+        return $this->context->table(self::TABLE_NAME)->where('user_id', $id)->fetchAll();
+    }
+
     /**
      * @param string $url Article url
      * @return float star rating

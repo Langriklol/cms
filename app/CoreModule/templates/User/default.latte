@@ -1,6 +1,16 @@
 {define title}{$user->username}{/define}
 {define description}{$user->description}{/define}
-<h1>{$user->username}</h1>
-<img src="{$user->profile_pic}" alt="{$user->username}"/>
+{block content}
+<h1>[{$user->role}]{$user->username}</h1>
+<img src="{$user->profile_pic}" width="240" height="240" alt="{$user->username}"/>
 <p>{$user->description}</p>
-<h4>{$user->created_at}</h4>
+<h4>Registered: {$user->created_at}</h4>
+<div>
+    <h4>Wrotes:</h4>
+    <span n:foreach="$userArticles as $article" style="float: left; padding: 2%;">
+        Title: {$article->title}<br />
+        Description: {$article->description} <br />
+        Date: {$article->datetime}<br />
+    </span>
+</div>
+<div style="clear: both;"></div>

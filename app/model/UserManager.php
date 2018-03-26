@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use http\Exception\BadUrlException;
 use Nette\Database\UniqueConstraintViolationException;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
@@ -24,7 +25,7 @@ class UserManager extends BaseManager implements IAuthenticator
     /**
      * CMS User login
      * @param array $credentials credentials
-     * @return Identity indentity for next manipulation
+     * @return Identity identity for next manipulation
      * @throws AuthenticationException Throws if error occurred during login p.g. bad password or nickname
      */
     public function authenticate(array $credentials)
@@ -69,6 +70,17 @@ class UserManager extends BaseManager implements IAuthenticator
         } catch (UniqueConstraintViolationException $e) {
             // Throws exception if the user with that name already exists
             throw new DuplicateNameException;
+        }
+    }
+
+    public function findUser(int $id)
+    {
+        try{
+            return $this->context->table(self::TABLE_NAME)
+                ->select('username, user_id, profile_pic, description, created_at, role')
+                ->where('user_id', $id)->fetch();
+        }catch (BadUrlException $e){
+            throw new BadUrlException;
         }
     }
 }

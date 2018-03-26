@@ -3,6 +3,7 @@ parameters:
         administration: Core:Administration
         article: Core:Article
         contact: Core:Contact
+        user: Core:User
 
 # Settings of own services accessible via DI in CoreModule
 services:
@@ -11,11 +12,13 @@ services:
                         - addResource(%administration%)
                         - addResource(%article%)
                         - addResource(%contact%)
+                        - addResource(%user%)
                         - allow(%guest%, %administration%, 'login')
                         - allow(%guest%, %administration%, 'register')
                         - allow(%guest%, %article%, 'default')
                         - allow(%guest%, %article%, 'list')
                         - allow(%guest%, %contact%)
+                        - allow(%guest%, %user%)
                         - allow(%member%, %administration%, 'default')
                         - allow(%member%, %administration%, 'logout')
 

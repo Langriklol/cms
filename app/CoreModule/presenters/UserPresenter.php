@@ -10,27 +10,28 @@ namespace App\CoreModule\Presenters;
 
 
 use App\Model\UserManager;
-use Nette\Application\BadRequestException;
-use Nette\Database\Context;
+use Nette\Utils\ArrayHash;
 
 class UserPresenter extends BaseCorePresenter
 {
     private $userManager;
-    private $context;
 
-    public function __construct(UserManager $userManager, Context $context)
+    public function __construct(UserManager $userManager)
     {
         parent::__construct();
-        $this->userManager = new $userManager;
-        $this->context = $context;
+        $this->userManager = $userManager;
     }
 
     public function renderDefault(int $id)
     {
         if($id){
-            $this->template->user = $this->context->table('user')
-                ->select('username, profile_pic, description, created_at')
-                ->where('user_id', $id);
+            $user = $this->userManager->findUser($id);
+            $articles = $user->related('article')->order('datetime');
+            bdump($articles);
+
+            $this->template->user = $user;
+            $this->template->userArticles = $articles;
+
         }else{
             $this->flashMessage('Invalid user!');
         }

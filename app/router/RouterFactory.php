@@ -19,6 +19,7 @@ class RouterFactory
         $router = new RouteList();
         $router[] = new Route('contact-us/', 'Core:Contact:default');
         $router[] = new Route('about/', 'Core:About:default');
+        $router[] = new Route('user/<id>', 'Core:User:default');
         $router[] = new Route('<action>/', [
             'presenter' => 'Core:Administration',
             'action' => [
@@ -45,7 +46,6 @@ class RouterFactory
             'url' => null,
         ));
         $router[] = new Route('[<url>]', 'Core:Article:default');
-        $router[] = new Route('user/[<id>]', 'Core:User:default');
         return $router;
     }
 }
