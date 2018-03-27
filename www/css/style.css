@@ -8,7 +8,6 @@ body {
 h1 {
 	text-align: center;
 	color: #444444;
-	text-shadow: 3px 3px 3px #aaaaaa;
 }
 
 footer {
@@ -31,12 +30,12 @@ nav li {
 }
 
 nav a {
-	background: #6FA4F8;
-	color: white;
+	background: transparent;
+	color: black;
 	padding: 5px 10px;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	text-decoration: none;
-	border: none;
+	border: 1px solid black;
 }
 
 nav a:hover {
@@ -46,11 +45,11 @@ nav a:hover {
 }
 
 input[type="submit"] {
-	background: #6FA4F8;
+	background: transparent;
 	color: white;
 	padding: 5px 10px;
-	border-radius: 10px;
-	border: 0;
+	/*border-radius: 10px;*/
+	border: 2px solid black;
 }
 
 input[type="submit"]:hover {
