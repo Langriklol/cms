@@ -6,15 +6,24 @@ $(document).ready(function(){
     stars.mouseenter(starHover);
     stars.mouseleave(returnStarState);
     stars[2].click(); // Sets default rating value to 3
-}); //Zkurvené anonymní funkce :)) Yeah, Lango is from czechia..
+}); //Zkurvené anonymní funkce :))
 
 //Set stars value
 function setStars() {
     var selectedStars = this.parentElement.children.indexOf(this) + 1;
     $("#rating").val(selectedStars);
+    nette.ajax(window.location.href, {
+        type: 'POST',
+        url: window.location.href,
+        data: {"starCount": selectedStars},
+        dataType: 'text',
+        async: true,
+        error: function () {
+            alert("An error occurred during rating.");
+        }
 
+    });
     returnStarState();
-
 }
 
 //Resets all stars and select all to cursor
