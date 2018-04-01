@@ -6,11 +6,11 @@
 <form class="rating">
     <input type="hidden" name="stars" id="rating">
     <p>
-        <span class="glyphicon glyphicon-star-empty review-star"></span>
-        <span class="glyphicon glyphicon-star-empty review-star"></span>
-        <span class="glyphicon glyphicon-star-empty review-star"></span>
-        <span class="glyphicon glyphicon-star-empty review-star"></span>
-        <span class="glyphicon glyphicon-star-empty review-star"></span>
+        <a href="{link rate!, $article->url, 1}"><span class="glyphicon glyphicon-star-empty review-star"></span></a>
+        <a href="{link rate!, $article->url, 2}"><span class="glyphicon glyphicon-star-empty review-star"></span></a>
+        <a href="{link rate!, $article->url, 3}"><span class="glyphicon glyphicon-star-empty review-star"></span></a>
+        <a href="{link rate!, $article->url, 4}"><span class="glyphicon glyphicon-star-empty review-star"></span></a>
+        <a href="{link rate!, $article->url, 5}"><span class="glyphicon glyphicon-star-empty review-star"></span></a>
     </p>
 </form>
 

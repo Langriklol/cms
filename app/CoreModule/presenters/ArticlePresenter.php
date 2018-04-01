@@ -81,15 +81,14 @@ class ArticlePresenter extends BaseCorePresenter
     /**
      * @param string $url Url of article
      * @param float $rating Rating to be count
-     * @throws BadRequestException Throws exception if not AJAX
      */
     public function handleRate(string $url, float $rating)
     {
-        if($this->isAjax())
+        if($this->getUser() && $this->user->getId())
         {
-            $this->articleManager->rateArticle($url, $rating);
+            $this->articleManager->rateArticle($url, $rating, $this->user->getId());
         }else{
-            throw new BadRequestException();
+            $this->flashMessage('You are not signed in.');
         }
     }
 

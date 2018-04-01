@@ -12,10 +12,16 @@ $(document).ready(function(){
 function setStars() {
     var selectedStars = this.parentElement.children.indexOf(this) + 1;
     $("#rating").val(selectedStars);
-    nette.ajax(window.location.href, {
+    nette.ajax('Core:Article:rate', {
         type: 'POST',
         url: window.location.href,
-        data: {"starCount": selectedStars},
+        data: {
+            "url": function () {
+                var url = window.location.href;
+                return url.split('/')[1];
+            },
+            "rating": selectedStars
+        },
         dataType: 'text',
         async: true,
         error: function () {

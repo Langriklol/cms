@@ -60,25 +60,41 @@ class ArticleManager extends BaseManager
     /**
      * @param string $url URL of article
      * @param float $rating Rating of article (0 to 5 - star rating; steps by 0.5)
+     * @param $userId
      */
-    public function rateArticle($url, $rating)
+    public function rateArticle($url, $rating, $userId)
     {
-        $article = $this->getArticle($url)[0];
-        if(!$article->rating) {
+        $article = $this->getArticle($url)['article'];
+        if($article->rating) {
             $currentRating = explode(',', $article->rating);
             list($currentRating, $count) = $currentRating;
-            $added = $count++;
+            $added = (int)$count;
+            $added++;
 
             // Rating is 4.5 by 12 people - 4.5,12; new rating is 4 stars. Then: 4.5*12 + 4 / 13(count of resulting ratings)
             //equals 4.462 stars which will be rounded to 4.5 :)
             // Need to get from average to sum of arithmetic avg. Then value of new rating is added.
             // Dividing by new sum of all ratings and getting new rating
-            $article->rating = (($currentRating * $count + $rating) / $added) . ",{$added}";
+            bdump((($currentRating * $count + $rating) / $added). ",{$added}", 'algorithm');
+            $article->update(['rating' => (($currentRating * $count + $rating) / $added) . ",{$added}"]);
+
+            $this->context->table('rating')
+                ->where('article_id', $article->article_id)
+                ->where('user_id', $userId)
+                ->update(['rating' => $rating]);
         }
         else{
-            $article->rating = "{$rating},1";
+            //$article->rating = "{$rating},1";
+            $article->update(['rating' => "{$rating},1"]);
+            $this->context->table('rating')
+                ->insert([
+                    'article_id' => $article->id,
+                    'user_id' => $userId,
+                    'rating' => $rating
+                ]);
         }
-        $this->context->table('article')->where('article_id', $article->article_id)->update($article);
+        $this->context->table(self::TABLE_NAME)->where('article_id', $article->article_id)->update($article);
+
     }
 
     /**
